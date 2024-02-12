@@ -10,3 +10,7 @@ class LifeTrackerView(APIView):
 
     def post(self, request, format=None):
         pass
+
+
+def index(request):
+    return render(request, "index.html")
