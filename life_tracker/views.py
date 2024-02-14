@@ -10,6 +10,7 @@ from .serializers import LifeCounterSerializer
 # Create your views here.
 
 
+## REST API
 class LifeTrackerViewSet(ModelViewSet):
     queryset = LifeCounter.objects.all()  # There really should only be one
     serializer_class = LifeCounterSerializer
@@ -26,5 +27,6 @@ class LifeTrackerViewSet(ModelViewSet):
         pass
 
 
+## NON REST API
 def index(request):
     return render(request, "index.html")

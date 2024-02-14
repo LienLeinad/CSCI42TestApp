@@ -27,3 +27,22 @@ class LifeTrackerTestCase(APITestCase):
             LifeCounter.objects.exists(),
             "Life Counter object should be created upon calling the url when no life counter object exists",
         )
+
+        with self.subTest("Test for existing life counter"):
+            self.assertEqual()
+
+    def test_reset(self):
+        """
+        Expected Behavior:
+            When POST /life_counter/reset/ is called, Life counter is set back to 40 for both players
+        """
+        url = f"{self.url}/reset/"
+        response = self.client.post(self.url)
+
+    def test_patch(self):
+        """
+        Expected Request Body:
+            url: PATCH /life_counter/<player_number: p1 or p2>/increment/
+            or
+            url: PATCH /life_counter/<player_number>/decrement/
+        """
