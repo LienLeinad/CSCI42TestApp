@@ -14,15 +14,12 @@ class LifeTrackerViewSet(ModelViewSet):
     queryset = LifeCounter.objects.all()  # There really should only be one
     serializer_class = LifeCounterSerializer
 
-    def retrieve(self, request: Request, pk=None):
+    def list(self, request: Request, pk=None):
         life_counter, created = LifeCounter.objects.get_or_create(
             defaults={"p1_life": 40, "p2_life": 40}
         )
         serializer = self.get_serializer(instance=life_counter)
         status_code = HTTP_201_CREATED if created else HTTP_200_OK
-        import ipdb
-
-        ipdb.set_trace()
         return Response(data=serializer.data, status=status_code)
 
     def post(self, request: Request, pk=None):
