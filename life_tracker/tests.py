@@ -19,8 +19,8 @@ class LifeTrackerTestCase(APITestCase):
         response = self.client.get(self.url)
         ## Functionality Testing (Black box)
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data.get("p1"), 40)
-        self.assertEqual(response.data.get("p2"), 40)
+        self.assertEqual(response.data.get("p1_life"), 40)
+        self.assertEqual(response.data.get("p2_life"), 40)
 
         ## Implementation Testing (White Box)
         self.assertTrue(
