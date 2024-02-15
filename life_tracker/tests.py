@@ -1,10 +1,11 @@
+from unittest.mock import patch
+
 from rest_framework.test import APITestCase
 
 from .models import LifeCounter
 
+
 # Create your tests here.
-
-
 class LifeTrackerTestCase(APITestCase):
     def setUp(self):
         self.url = "/life_counter/"
@@ -37,7 +38,8 @@ class LifeTrackerTestCase(APITestCase):
 
             self.assertEqual(1, LifeCounter.objects.count())
 
-    def test_reset(self):
+    @patch("django.db.models.query.QuerySet.delete")
+    def test_reset(self, mocked_delete):
         """
         Expected Behavior:
             When POST /life_counter/reset/ is called, Life counter is set back to 40 for both players
@@ -51,6 +53,9 @@ class LifeTrackerTestCase(APITestCase):
 
         self.assertEqual(LifeCounter.objects.first().p1_life, 40)
         self.assertEqual(LifeCounter.objects.first().p2_life, 40)
+
+        # Test that LifeCounters really were deleted
+        mocked_delete.assert_called_once()
 
     def test_patch(self):
         """
