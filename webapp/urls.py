@@ -21,6 +21,5 @@ from life_tracker.views import LifeTrackerView, index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("life_tracker/", LifeTrackerView.as_view()),
     path("", index),
 ]
