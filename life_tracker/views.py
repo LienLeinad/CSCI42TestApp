@@ -16,9 +16,14 @@ class LifeTrackerViewSet(ModelViewSet):
     serializer_class = LifeCounterSerializer
 
     def list(self, request: Request, pk=None):
-        life_counter, created = LifeCounter.objects.get_or_create(
-            defaults={"p1_life": 40, "p2_life": 40}
-        )
+        created = False
+        # Check if a life counter exists
+        if not LifeCounter.objects.exists():
+            # Create one if it exists
+            LifeCounter.objects.create()
+            created = True
+
+        life_counter = self.get_queryset().first()
         serializer = self.get_serializer(instance=life_counter)
         status_code = HTTP_201_CREATED if created else HTTP_200_OK
         return Response(data=serializer.data, status=status_code)
