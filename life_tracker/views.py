@@ -33,7 +33,7 @@ class LifeTrackerViewSet(ModelViewSet):
 
     @action(methods=["post"], detail=False, url_name="reset")
     def reset(self, request: Request):
-        LifeCounter.objects.delete()  # Deletes all LifeCounter objects
+        LifeCounter.objects.all().delete()  # Deletes all LifeCounter objects
         life_counter = LifeCounter.objects.create()  # Creates a new life counter object
 
         serializer = self.get_serializer(instance=life_counter)
