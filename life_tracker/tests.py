@@ -27,6 +27,3 @@ class LifeTrackerTestCase(APITestCase):
             LifeCounter.objects.exists(),
             "Life Counter object should be created upon calling the url when no life counter object exists",
         )
-
-        with self.subTest("Test for existing life counter"):
-            self.assertEqual()
