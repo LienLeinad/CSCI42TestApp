@@ -42,8 +42,15 @@ class LifeTrackerTestCase(APITestCase):
         Expected Behavior:
             When POST /life_counter/reset/ is called, Life counter is set back to 40 for both players
         """
-        url = f"{self.url}/reset/"
-        response = self.client.post(self.url)
+        url = f"{self.url}reset/"
+        response = self.client.post(url)
+
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(response.data.get("p1_life"), 40)
+        self.assertEqual(response.data.get("p2_life"), 40)
+
+        self.assertEqual(LifeCounter.objects.first().p1_life, 40)
+        self.assertEqual(LifeCounter.objects.first().p2_life, 40)
 
     def test_patch(self):
         """

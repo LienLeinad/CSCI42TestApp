@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
@@ -23,13 +24,21 @@ class LifeTrackerViewSet(ModelViewSet):
             LifeCounter.objects.create()
             created = True
 
-        life_counter = self.get_queryset().first()
+        life_counter = (
+            LifeCounter.objects.first()
+        )  # There should, in any case, only be one
         serializer = self.get_serializer(instance=life_counter)
         status_code = HTTP_201_CREATED if created else HTTP_200_OK
         return Response(data=serializer.data, status=status_code)
 
-    def post(self, request: Request, pk=None):
-        pass
+    @action(methods=["post"], detail=False, url_name="reset")
+    def reset(self, request: Request):
+        LifeCounter.objects.delete()  # Deletes all LifeCounter objects
+        life_counter = LifeCounter.objects.create()  # Creates a new life counter object
+
+        serializer = self.get_serializer(instance=life_counter)
+
+        return Response(data=serializer.data)
 
 
 ## NON REST API
