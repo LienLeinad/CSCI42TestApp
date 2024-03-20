@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<style>
+
+.layout-grid-2 {
+	display: flex;
+    
+}
+
+.column {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+input {
+	text-align: center;
+  	border: none;
+    width: 100%;
+}
+
+input:focus {
+	outline: none;
+    border-bottom: 2px solid black;
+}
+
+button {
+	border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 18px;
+    border: 1px solid #E0E0E0;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+	background-color: #F9F9F9;
+}
+
+button:active {
+	background-color: #E9E9E9;
+}
+
+.button-group {
+	margin-top: 2rem;
+	display: grid;
+    grid: auto / auto auto auto;
+    gap: 1rem;
+}
+
+.health-counter {
+	font-size: 120px;
+}
+
+.player-name {
+	font-size: 48px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="layout-grid-2">
+	<div class="column">
+    	<input class="health-counter" value="40">
+        <input class="player-name" placeholder="Enter name" value="Player 1">
+        <div class="button-group">
+        	<button class="counter-button">-10</button>
+            <button class="counter-button">-5</button>
+            <button class="counter-button">-1</button>
+            <button class="counter-button">+10</button>
+            <button class="counter-button">+5</button>
+            <button class="counter-button">+1</button>
+        </div>
+    </div>
+    <div class="column">
+    	<input class="health-counter" value="40">
+        <input class="player-name" placeholder="Enter name" value="Player 2">
+        <div class="button-group">
+        	<button class="counter-button">-10</button>
+            <button class="counter-button">-5</button>
+            <button class="counter-button">-1</button>
+            <button class="counter-button">+10</button>
+            <button class="counter-button">+5</button>
+            <button class="counter-button">+1</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
