@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +30,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "ipdb",
     "life_tracker",
+    "channels",
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "webapp.wsgi.application"
+ASGI_APPLICATION = "webapp.asgi.application"
 
 
 # Database
