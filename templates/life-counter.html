@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<style>
+
+.layout-grid-2 {
+	display: flex;
+    
+}
+
+.column {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+input {
+	text-align: center;
+  	border: none;
+    width: 100%;
+}
+
+input:focus {
+	outline: none;
+    border-bottom: 2px solid black;
+}
+
+button {
+	border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 18px;
+    border: 1px solid #E0E0E0;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+	background-color: #F9F9F9;
+}
+
+button:active {
+	background-color: #E9E9E9;
+}
+
+.button-group {
+	margin-top: 2rem;
+	display: grid;
+    grid: auto / auto auto auto;
+    gap: 1rem;
+}
+
+.health-counter {
+	font-size: 120px;
+}
+
+.player-name {
+	font-size: 48px;
+}
+</style>
+
+</head>
+<body>
+
+
+</div>
+<div class="layout-grid-2">
+	<div class="column">
+    	<input class="health-counter" id="p1_life">
+        <input class="player-name" placeholder="Enter name" id="p1_name">
+        <div class="button-group" id="p1-button-group">
+        	<button class="counter-button" value="-10" onclick="updateLife(-10, 'p1')">-10</button>
+            <button class="counter-button" value="-5" onclick="updateLife(-5, 'p1')">-5</button>
+            <button class="counter-button" value="-1" onclick="updateLife(-1, 'p1')">-1</button>
+            <button class="counter-button" value="10" onclick="updateLife(10, 'p1')">+10</button>
+            <button class="counter-button" value="5"onclick="updateLife(5, 'p1')">+5</button>
+            <button class="counter-button" value="1"onclick="updateLife(1, 'p1')">+1</button>
+        </div>
+    </div>
+    <div class="column">
+    	<input class="health-counter" id="p2_life">
+        <input class="player-name" placeholder="Enter name" id="p2_name">
+        <div class="button-group" id="p2-button-group">
+        	<button class="counter-button" value="-10" onclick="updateLife(-10, 'p2')">-10</button>
+            <button class="counter-button" value="-5" onclick="updateLife(-5, 'p2')">-5</button>
+            <button class="counter-button" value="-1" onclick="updateLife(-1, 'p2')">-1</button>
+            <button class="counter-button" value="10" onclick="updateLife(10, 'p2')">+10</button>
+            <button class="counter-button" value="5"onclick="updateLife(5, 'p2')">+5</button>
+            <button class="counter-button" value="1"onclick="updateLife(1, 'p2')">+1</button>
+        </div>
+    </div>
+</div>
+<script>
+    // const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/life_tracking/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(JSON.parse(e.data));
+        var p1_life = document.getElementById('p1_life');
+        p1_life.setAttribute('value', data.p1_life);
+        var p2_life = document.getElementById('p2_life');
+        p2_life.setAttribute('value', data.p2_life);
+
+        var p1_name = document.getElementById('p1_name');
+        p1_name.setAttribute('value', data.p1_name);
+        var p2_name = document.getElementById('p2_name');
+        p2_name.setAttribute('value', data.p2_name);
+    };
+
+
+    chatSocket.onclose = function(e) {
+        window.alert("Server has been disconnected, please refresh this page")
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    const updateLife = function(num, player_number){
+        player_number = player_number
+        chatSocket.send(JSON.stringify({"player": player_number, "amount_update": num}))
+    }
+
+    p1_name = document.querySelector("#p1_name");
+    p1_name.focus();
+    p1_name.onkeyup = function(e){
+        updateName(document.getElementById("p1_name").value, "p1")
+    }
+    p2_name = document.querySelector("#p2_name");
+    p2_name.focus();
+    p2_name.onkeyup = function(e){
+        updateName(document.getElementById("p2_name").value, "p2")
+    }
+    const updateName = function(name, player_number){
+        chatSocket.send(JSON.stringify({"player": player_number, "name": name}))
+    }
+
+</script>
+</body>
+</html>

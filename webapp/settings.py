@@ -59,7 +59,7 @@ ROOT_URLCONF = "webapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -71,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 ASGI_APPLICATION = "webapp.asgi.application"
 

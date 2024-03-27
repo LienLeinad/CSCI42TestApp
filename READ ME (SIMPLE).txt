@@ -1,0 +1,15 @@
+How to run:
+1. Connect to a PRIVATELY OWNED network. This will not work for public networks
+2. Double-click run.bat
+3. You'll see a bunch of text show up in a command prompt, look for 
+"Wireless LAN adapter Wi-Fi:"
+and under it, you'll see something like
+IPv4 Address. . . . . . . . . . . : <some IP address>
+4. Using that ip address, go to the phone that you'll use to track life on stage. Type in the browser's URL bar
+"<The IP address>:8000/home"
+This will bring the user to the page where they can update the names and life totals of the players
+5. In the Streaming Computer, open a web browser and type "localhost:8000/home" in the address
+This will bring the user to the page where they can update the names and life totals of the players, as well as
+display the data to the stream.
+6. Inputs should all be done by the user with the phone, to avoid any bugs.
+7. If any bugs occur during use, simply refresh the browser page on either devices.

@@ -1,2 +1,1 @@
-ipconfig
-python manage.py runserver 0.0.0.0:8000
+cd .venv/Scripts && activate && cd ../.. && ipconfig &&  python manage.py runserver 0.0.0.0:8000
